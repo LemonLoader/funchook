@@ -77,29 +77,29 @@ function(add_subdirectory_pic source_dir binary_dir)
   add_subdirectory(${source_dir} ${binary_dir})
 endfunction(add_subdirectory_pic)
 
+##[[configure_file(cmake/capstone.cmake.in capstone-download/CMakeLists.txt)
+#  execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
+#      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/capstone-download"
+#  )
+#  execute_process(COMMAND "${CMAKE_COMMAND}" --build .
+#      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/capstone-download"
+#  )
 #
+#  string(TOUPPER ${FUNCHOOK_CPU} FUNCHOOK_CPU_UPPER)
+#
+#  set(CAPSTONE_BUILD_SHARED OFF CACHE BOOL "")
+#  set(CAPSTONE_BUILD_STATIC_RUNTIME OFF CACHE BOOL "")
+#  set(CAPSTONE_BUILD_TESTS OFF CACHE BOOL "")
+#  set(CAPSTONE_BUILD_CSTOOL OFF CACHE BOOL "")
+#  set(CAPSTONE_ARCHITECTURE_DEFAULT OFF CACHE BOOL "")
+#  set(CAPSTONE_${FUNCHOOK_CPU_UPPER}_SUPPORT ON CACHE BOOL "")
+#  add_subdirectory_pic(${CMAKE_CURRENT_BINARY_DIR}/capstone-src ${CMAKE_CURRENT_BINARY_DIR}/capstone-build)
+#
+#  list(APPEND FUNCHOOK_DEPS capstone-static)]]
 # capstone
 #
 if (DISASM_CAPSTONE)
-  configure_file(cmake/capstone.cmake.in capstone-download/CMakeLists.txt)
-  execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/capstone-download"
-  )
-  execute_process(COMMAND "${CMAKE_COMMAND}" --build .
-      WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/capstone-download"
-  )
 
-  string(TOUPPER ${FUNCHOOK_CPU} FUNCHOOK_CPU_UPPER)
-
-  set(CAPSTONE_BUILD_SHARED OFF CACHE BOOL "")
-  set(CAPSTONE_BUILD_STATIC_RUNTIME OFF CACHE BOOL "")
-  set(CAPSTONE_BUILD_TESTS OFF CACHE BOOL "")
-  set(CAPSTONE_BUILD_CSTOOL OFF CACHE BOOL "")
-  set(CAPSTONE_ARCHITECTURE_DEFAULT OFF CACHE BOOL "")
-  set(CAPSTONE_${FUNCHOOK_CPU_UPPER}_SUPPORT ON CACHE BOOL "")
-  add_subdirectory_pic(${CMAKE_CURRENT_BINARY_DIR}/capstone-src ${CMAKE_CURRENT_BINARY_DIR}/capstone-build)
-
-  list(APPEND FUNCHOOK_DEPS capstone-static)
   set(DISASM capstone)
 endif ()
 
